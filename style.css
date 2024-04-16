@@ -1,0 +1,18 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/*
+
+COLORS: 
+	red/orange: #e23515
+	grey: #b8abb3
+	off-white: #f4f4f4
+	white: #fff
+	black: #000
+
+*/
+
+.body { 
+	align-items: center;
+	justify-content: center;
+}
