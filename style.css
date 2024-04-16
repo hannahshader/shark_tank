@@ -15,4 +15,6 @@ COLORS:
 .body { 
 	align-items: center;
 	justify-content: center;
+	color: #000;
+	background-color: #f4f4f4;
 }
