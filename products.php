@@ -80,7 +80,7 @@
 
 			
 			// Get + display menu items: 
-			$sql = "SELECT * from Menu";
+			$sql = "SELECT * from Pokemon";
 			$whole_menu = $conn->query($sql);
 			
 			while($row = $whole_menu->fetch_assoc()) 
