@@ -40,9 +40,10 @@
             <div>
                 <select name="pokemonType" id="pokemonTypeSelect">
                     <option value="" selected disabled>Select your type &#x25BE;</option>
-                    <option value="fire">Fire</option>
-                    <option value="water">Water</option>
-                    <option value="ground">Ground</option>
+					<option value="NOTICE">HAVENT DONE FILTERING W PHP YET</option>
+                    <option value="Fire">Fire</option>
+                    <option value="Water">Water</option>
+                    <option value="Ground">Ground</option>
                     <!-- add more -->
                 </select>
 
@@ -63,10 +64,47 @@
             <!-- Results  -->
             <div id="resultGrid">
                 <!-- Placeholder -->
+			<?php
+			// Establish connection with database:
+//			$server = 'localhost';
+//			$userid = 'uyugv9zmpnsmm';
+//			$pw = '6dnclcawsv7z';
+//			$db ='dbopzdajwlwfoj';
+//				
+//			$conn = new mysqli($server, $userid, $pw, $db );
+			$conn = new mysqli('localhost', 'uyugv9zmpnsmm', '6dnclcawsv7z', 'dbopzdajwlwfoj');
+           
+			if ($conn->connect_error) {
+               die("Connection failed: " . $conn->connect_error);
+           }
 
+			
+			// Get + display menu items: 
+			$sql = "SELECT * from Menu";
+			$whole_menu = $conn->query($sql);
+			
+			while($row = $whole_menu->fetch_assoc()) 
+			{
+				extract ($row);
+				echo "<div class='gridItem'>";
+				
+				echo "<div class='gridCircle'>"; // dummy code. TODO: get + display image from API.
+				echo "<div class='gridCircle' src='char.jpeg'><br>";
+				echo "</div>";
+			
+				echo "<p class='gridPokemonName'>$Name</p>";
+				echo "<p class='gridInfo'>Info: $$Price</p>";		
+        		echo "</div>";
+    		} 
+		
+		// Close connection with database:
+    	$conn->close();
+				
+			?>
 
                 <!-- Make instances of these when reading from the API -->
                 <!-- NOTICE to allow for filtering  -->
+<!--
                 <div class="gridItem" data-type="fire" data-price="cheap">
                     <div class="gridCircle">    
                         <img class="gridImage" src="char.jpeg" alt="">
@@ -99,6 +137,7 @@
                     <p class="gridInfo">More Info</p>
 
                 </div>
+-->
 
             </div>
         </div>
