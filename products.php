@@ -40,7 +40,7 @@
             <div>
                 <select name="pokemonType" id="pokemonTypeSelect">
                     <option value="" selected disabled>Select your type &#x25BE;</option>
-					<option value="NOTICE">HAVENT DONE FILTERING W PHP YET</option>
+					<option value="NOTICE">HAVENT DONE FILTERING W PHP YET. THEY ARE ALL SET TO FIRE TYPE</option>
                     <option value="Fire">Fire</option>
                     <option value="Water">Water</option>
                     <option value="Ground">Ground</option>
@@ -66,12 +66,6 @@
                 <!-- Placeholder -->
 			<?php
 			// Establish connection with database:
-//			$server = 'localhost';
-//			$userid = 'uyugv9zmpnsmm';
-//			$pw = '6dnclcawsv7z';
-//			$db ='dbopzdajwlwfoj';
-//				
-//			$conn = new mysqli($server, $userid, $pw, $db );
 			$conn = new mysqli('localhost', 'uyugv9zmpnsmm', '6dnclcawsv7z', 'dbopzdajwlwfoj');
            
 			if ($conn->connect_error) {
@@ -86,11 +80,10 @@
 			while($row = $whole_menu->fetch_assoc()) 
 			{
 				extract ($row);
-				echo "<div class='gridItem'>";
+				echo "<div class='gridItem' data-type='Fire' data-price='cheap'>"; //FIX data-type SO IT PULLS FROM DATABASE
 				
-				echo "<div class='gridCircle'>"; // dummy code. TODO: get + display image from API.
-				echo "<div class='gridCircle' src='char.jpeg'><br>";
-				echo "</div>";
+				// dummy code. TODO: get + display image from API.
+				echo "<div class='gridCircle' src='char.jpeg'><img class='gridImage' src='char.jpeg'></div>"; 
 			
 				echo "<p class='gridPokemonName'>$Name</p>";
 				echo "<p class='gridInfo'>Info: $$Price</p>";		
