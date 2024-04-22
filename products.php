@@ -67,41 +67,41 @@
 			<?php
 			// Establish connection with database:
 			$conn = new mysqli('localhost', 'uyugv9zmpnsmm', '6dnclcawsv7z', 'dbopzdajwlwfoj');
-           
+
 			if ($conn->connect_error) {
                die("Connection failed: " . $conn->connect_error);
            }
 
-			
-			// Get + display menu items: 
+
+			// Get + display menu items:
 			$sql = "SELECT * from Pokemon";
 			$whole_menu = $conn->query($sql);
-			
-			while($row = $whole_menu->fetch_assoc()) 
+
+			while($row = $whole_menu->fetch_assoc())
 			{
 				extract ($row);
 				echo "<div class='gridItem' data-type='Fire' data-price='cheap'>"; //FIX data-type SO IT PULLS FROM DATABASE
-				
+
 				// dummy code. TODO: get + display image from API.
-				echo "<div class='gridCircle' src='char.jpeg'><img class='gridImage' src='char.jpeg'></div>"; 
-			
+				echo "<div class='gridCircle' src='char.jpeg'><img class='gridImage' src='char.jpeg'></div>";
+
 				echo "<p class='gridPokemonName'>$Name</p>";
-				echo "<p class='gridInfo'>Info: $$Price</p>";		
+				echo "<p class='gridInfo'>Info: $$Price</p>";
         		echo "</div>";
-    		} 
-		
+    		}
+
 		// Close connection with database:
     	$conn->close();
-				
+
 			?>
 
 <!--				OLD BENSON CODE -->
-				
+
                 <!-- Make instances of these when reading from the API -->
                 <!-- NOTICE to allow for filtering  -->
 <!--
                 <div class="gridItem" data-type="fire" data-price="cheap">
-                    <div class="gridCircle">    
+                    <div class="gridCircle">
                         <img class="gridImage" src="char.jpeg" alt="">
                     </div>
                     <p class="gridPokemonName">Pokemon Name</p>
@@ -109,7 +109,7 @@
 
                 </div>
                 <div class="gridItem"  data-type="water" data-price="expensive">
-                    <div class="gridCircle">    
+                    <div class="gridCircle">
                         <img class="gridImage" src="char.jpeg" alt="">
                     </div>
                     <p class="gridPokemonName">Pokemon Name</p>
@@ -117,7 +117,7 @@
 
                 </div>
                 <div class="gridItem"  data-type="ground" data-price="cheap">
-                    <div class="gridCircle">    
+                    <div class="gridCircle">
                         <img class="gridImage" src="char.jpeg" alt="">
                     </div>
                     <p class="gridPokemonName">Pokemon Name</p>
@@ -125,7 +125,7 @@
 
                 </div>
                 <div class="gridItem"  data-type="fire" data-price="average">
-                    <div class="gridCircle">    
+                    <div class="gridCircle">
                         <img class="gridImage" src="char.jpeg" alt="">
                     </div>
                     <p class="gridPokemonName">Pokemon Name</p>
@@ -136,13 +136,11 @@
 
             </div>
         </div>
-
     </div>
 
 
     <footer class="footerStyle">
         Style for Footer Later
-
     </footer>
 
 
@@ -157,13 +155,13 @@
         // Add event listener to the 'pokemonTypeSelect' select element
         pokemonTypeSelect.addEventListener('change', function() {
             displaySelectedFilter(this, activeFiltersDiv);
-            
+
         });
 
         // Add event listener to the 'pokemonPriceSelect' select element
         pokemonPriceSelect.addEventListener('change', function() {
             displaySelectedFilter(this, activeFiltersDiv);
-            
+
         });
 
         // Function to display the selected filter
@@ -217,9 +215,8 @@
             activeFiltersDiv.appendChild(newDiv);
 
             displayPokemon();
-
         }
-        
+
         function displayPokemon(){
             var selectedType = pokemonTypeSelect.value;
             var selectedPrice = pokemonPriceSelect.value;
@@ -239,7 +236,6 @@
                 else{
                     pokemon.style.display = "none";
                 }
-
             }
         }
 
@@ -256,7 +252,7 @@
                 overlayInfo.className = 'overlay';
                 var overlayContent = document.createElement('div');
                 overlayContent.className = 'overlay-content';
-                overlayContent.innerHTML = 'Overlay Content'; 
+                overlayContent.innerHTML = 'Overlay Content';
                 overlayInfo.appendChild(overlayContent);
                 document.body.appendChild(overlayInfo);
                 document.body.classList.add('no-scroll'); // Add no-scroll class to body
