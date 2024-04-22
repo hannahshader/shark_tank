@@ -1,1 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Test</title>
+    <style>
+    body {
         font-family: Arial, sans-serif; margin: 20px;
+
+    .product {
+        margin-bottom: 20px;
+    }
+
+    label {
+        margin-right: 10px;
+    }
+
+    input[type="number"] {
+        width: 50px; }
+
+    </style>
+</head>
+<body>
+    <h1>Cart Testing Page</h1>
+
+    <div id="the_form"></div>
+
+    <script src="shopping_cart.js"></script>
+
+    <!-- $("#pokeCat").html(catInEng.genus);
+    $("#pokeFlavorText").html(flavorInEng.flavor_text); -->
+
+    <script>
+    window.onload = function(){
+        var form_str = "<form method='post' action=''>";
+        for (var i = 1; i < 11; i++) {
+            form_str+="<div class='product'>";
+            form_str+="<label for='product1'>Product "+i+":</label>";
+            // document.write("<input type='number' id='product"+i+"' name='product"+i+"' value='0' min='0'>");
+            form_str+="<select name='product"+i+"' class='quan_select'>";
+            for (var z=0; z<=10; z++) {
+                form_str+="<option value="+z+">"+z+"</option>";
+            }
+            form_str+="</select>";
+            form_str+="<button onclick='removeFromCart("+i+")'>Remove Item</button>";
+            form_str+="</div>";
+        }
+
+
+        // document.write( "<div class='game-container'>" );
+        // const NUM_SQUARES = 9;
+        // for (i=0; i<NUM_SQUARES; i++)
+        // {
+        //     id = "sq"+i;
+        //     document.write( "<div class='square' id='" + id + "'></div>" );
+        // }
+        // document.write( "</div>" );
+        //
+        //     <div class="product">
+        //       <label for="product1">Product 1:</label>
+        //       <input type="number" id="product1" name="product1" value="0" min="0">
+        //     </div>
+        //
+        //     echo "<select name='$name' class='quan_select'>";
+        //     for (var i = 0; i < array.length; i++) {
+        //         array[i]
+        //     }
+        //     for (var i=0; i<=10; i++) {
+        //         echo "<option value='i'>$i</option>";
+        //     }
+        //     echo "<select><br>";
+        form_str+="</form>";
+        form_str+="<button onclick='addToCart()'>Add To Cart</button>";
+        form_str+="<br>";
+        // form_str+="<button onclick='displayCart()'>Display Cart</button>";
+        // form_str+="<br>";
+        form_str+="<button onclick='clearCart()'>Clear Cart</button>";
+        form_str+="<br>";
+        document.getElementById("the_form").innerHTML = form_str;
+        // $("#the_form").html(form_str);
+
+        initCart();
+        // addToCart("Bruh");
+        // addToCart("Bruh2");
+        // addToCart("Bruh3");
+        // addToCart("Bruh2");
+        // addToCart("Bruh3");
+        // addToCart("Bruh3");
+        displayCart();
+        // price
+    };
+    </script>
+
+</form>
+
+
+<div class="output" id="output1">
+    <br> output1 <br>
+</div>
+
+<div class="output" id="output2">
+    <br> output2 <br>
+</div>
+
+<div class="output" id="output3">
+    <br> output3 <br>
+</div>
+
+<!-- <select name='product1' class='quan_select'><option value='0'>$i</option><select>
+
+<div class="product">
+<label for="product1">Product 1:</label>
+<input type="number" id="product1" name="product1" value="0" min="0">
+<select name='$name' class='quan_select'>
+<option value='i'>$i</option>
+<option value='i'>$i</option>
+<option value='i'>$i</option>
+</div>
+
+<div class="product">
+<label for="product2">Product 2:</label>
+<input type="number" id="product2" name="product2" value="0" min="0">
+</div>
+
+<div class="product">
+<label for="product3">Product 3:</label>
+<input type="number" id="product3" name="product3" value="0" min="0">
+</div>
+
+<div class="product">
+<label for="product4">Product 4:</label>
+<input type="number" id="product4" name="product4" value="0" min="0">
+</div>
+
+<div class="product">
+<label for="product5">Product 5:</label>
+<input type="number" id="product5" name="product5" value="0" min="0">
+</div>
+
+<div class="product">
+<label for="product6">Product 6:</label>
+<input type="number" id="product6" name="product6" value="0" min="0">
+</div>
+
+</form>
+
+-->
+
+<button onclick="submitOrder()">Submit Order</button>
+
+<script>
+function submitOrder() {
+    var total = 0;
+    for (var i = 1; i <= 11; i++) {
+        var productQuantity = parseInt(document.getElementById('product' + i).value);
+        total += productQuantity;
+    }
+    alert("You have selected a total of " + total + " products.");
+}
+
+// function addToCart() {
+//     var total = 0;
+//     for (var i = 1; i <= 6; i++) {
+//         var productQuantity = parseInt(document.getElementById('product' + i).value);
+//         total += productQuantity;
+//     }
+//     alert("You have selected a total of " + total + " products.");
+// }
+</script>
+
+</body>
+</html>
