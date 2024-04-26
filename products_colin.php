@@ -116,7 +116,13 @@
 //				}
 //				console.log($name);
 				
-				echo "<div class='gridItem' data-type1=$Type1 data-type2=$Type2 data-price=$price_range>";
+				if($Type2 === null){
+					echo "<div class='gridItem' data-type1=$Type1 data-type2=NULL data-price=$price_range>";
+				} else {
+					echo "<div class='gridItem' data-type1=$Type1 data-type2=$Type2 data-price=$price_range>";
+				}
+				
+				
 				
 
                 $lowercase_name = strtolower("$Name");
@@ -260,29 +266,27 @@ echo "</script>\n";
 
         }
 
-        function displayPokemon(){
-            var selectedType = pokemonTypeSelect.value;
-            var selectedPrice = pokemonPriceSelect.value;
+       function displayPokemon() {
+		var selectedType = pokemonTypeSelect.value;
+		var selectedPrice = pokemonPriceSelect.value;
 
-            var pokeDiv = document.getElementsByClassName("gridItem");
+		var pokeDiv = document.getElementsByClassName("gridItem");
 
-            for(var i = 0; i < pokeDiv.length ; i++){
-                var pokemon = pokeDiv[i];
+		for (var i = 0; i < pokeDiv.length; i++) {
+			var pokemon = pokeDiv[i];
 
-                var type1 = pokemon.dataset.type1; //is this part pulling from the db??
-				var type2 = pokemon.dataset.type2;
-                var price = pokemon.dataset.price; //all price are set to 'cheap' rn. need function that will calculate price range
-//				var category = pokemon.datasset.Categories; (holder code. fix)
+			var type1 = pokemon.dataset.type1;
+			var type2 = pokemon.dataset.type2;
+			var price = pokemon.dataset.price;
 
-
-                if((selectedType === '' || selectedType === type1 || selectedType === type2) && (selectedPrice === '' || selectedPrice === price)){
-                    pokemon.style.display = "";
-                }
-                else{
-                    pokemon.style.display = "none";
-                }
-            }
-        }
+			if ((selectedType === '' || selectedType === type1 || selectedType === type2 || (selectedType !== '' && (type2 === '"' || type2 === ""))) &&
+				(selectedPrice === '' || selectedPrice === price)) {
+				pokemon.style.display = "";
+			} else {
+				pokemon.style.display = "none";
+			}
+		}
+	   }
 
 
 
