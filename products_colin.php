@@ -48,7 +48,7 @@
 				
 				<select name="pokemonType" id="pokemonTypeSelect">
                     <option value="" selected disabled>Select your type &#x25BE;</option>
-					<option value="Normal">Normal</option>
+				  <option value="Normal">Normal</option>
                     <option value="Fire">Fire</option>
                     <option value="Water">Water</option>
 					<option value="Electric">Electric</option>
@@ -100,6 +100,35 @@
 			{
 				extract ($row);
 				
+				// Get categories for the current Pokémon
+				$categories_sql = "SELECT Category FROM Pokemon_Categories WHERE Name = '$Name'";
+				$categories_result = $conn->query($categories_sql);
+
+				$adventure = false;
+				$battle = false;
+				$companionship = false;
+				$events = false;
+
+				while ($categories_row = $categories_result->fetch_assoc()) {
+					switch ($categories_row["Category"]) {
+						case "Adventure":
+							$adventure = true;
+							break;
+						case "Battle":
+							$battle = true;
+							break;
+						case "Companionship":
+							$companionship = true;
+							break;
+						case "Events":
+							$events = true;
+							break;
+						default:
+							// Handle unknown category
+							break;
+					}
+				}
+				
 				$price_range = "cheap";
 				
 				if ($Price > 5000) {
@@ -107,21 +136,15 @@
 				} else if ($Price > 1000) {
 					$price_range = "average";
 				} 
-//				if ($Price < 1000 || $Price == 1000) {
-//					$price_range = "cheap";
-//				} else if ($Price <= 5000) {
-//					$price_range = "average";
-//				} else {
-//					$price_range = "expensive";
-//				}
-//				console.log($name);
 				
-				if($Type2 === null){
-					echo "<div class='gridItem' data-type1=$Type1 data-type2=NULL data-price=$price_range>";
-				} else {
-					echo "<div class='gridItem' data-type1=$Type1 data-type2=$Type2 data-price=$price_range>";
+				$Type2_handleNULL = $Type2;
+				if ($Type2 === null) {
+					$Type2_handleNULL = "NULL";
 				}
 				
+				
+				echo "<div class='gridItem' data-type1=$Type1 data-type2=$Type2_handleNULL data-price=$price_range ";
+				echo"data-adventure=$adventure data-companionship=$companionship data-battle=$battle data-events=$events>";
 				
 				
 
@@ -129,50 +152,58 @@
                 if ($lowercase_name == "mr. mime") {
                     $lowercase_name = "mr-mime";
                 }
+				
+				
                 echo "<script>\n";
                
                 echo "</script>\n";
-                echo "<div class='gridCircle' id=$lowercase_name-image src='char.jpeg'></div>";
+                echo "<div class='gridCircle' id=$lowercase_name-image src='char.jpeg'></div>"; //char.jpeg?
 
 
 
-echo "<script>\n";
-echo "fetchAPI('$lowercase_name');\n";
+				echo "<script>\n";
+				echo "fetchAPI('$lowercase_name');\n";
 
-echo "async function fetchAPI(name) {\n";
+				echo "async function fetchAPI(name) {\n";
 
-echo "    var urlString = 'https://pokeapi.co/api/v2/pokemon/' + name;\n";
-echo "    var urlStringSpecies = 'https://pokeapi.co/api/v2/pokemon-species/' + name;\n";
-echo "    console.log(urlString);\n";
-echo "    res = fetch(urlString)\n";
-echo "    .then (res => res.text())\n";
-echo "    .then (data =>\n";
-echo "        {\n";
-echo "            resSpec = fetch(urlStringSpecies)\n";
-echo "            .then (resSpec => resSpec.text())\n";
-echo "            data = JSON.parse(data);\n";
-echo "            image = data.sprites.other['official-artwork'].front_default;\n";
+				echo "    var urlString = 'https://pokeapi.co/api/v2/pokemon/' + name;\n";
+				echo "    var urlStringSpecies = 'https://pokeapi.co/api/v2/pokemon-species/' + name;\n";
+				echo "    console.log(urlString);\n";
+				echo "    res = fetch(urlString)\n";
+				echo "    .then (res => res.text())\n";
+				echo "    .then (data =>\n";
+				echo "        {\n";
+				echo "            resSpec = fetch(urlStringSpecies)\n";
+				echo "            .then (resSpec => resSpec.text())\n";
+				echo "            data = JSON.parse(data);\n";
+				echo "            image = data.sprites.other['official-artwork'].front_default;\n";
 
-echo "            console.log((data.name)[0].toUpperCase() + (data.name).substring(1));\n";
-echo "            console.log('IMAGE: ' + image);\n";
+				echo "            console.log((data.name)[0].toUpperCase() + (data.name).substring(1));\n";
+				echo "            console.log('IMAGE: ' + image);\n";
+
+				echo "            document.getElementById(name+'-image').innerHTML = '<img src='+image+'>';\n";
+				echo "        })\n";
+				echo "        .catch (error => console.log(error));\n";
+				echo "}\n";
+				echo "</script>\n";
+
+
 				
-echo "            document.getElementById(name+'-image').innerHTML = '<img src='+image+'>';\n";
-echo "        })\n";
-echo "        .catch (error => console.log(error));\n";
-echo "}\n";
-echo "</script>\n";
-
-
-
+				// Display Pokémomn's info
 
 				echo "<p class='gridPokemonName'>$Name</p>";
-				echo "<p class='gridInfo'>Price: $$Price</p>";
-				echo "<p class='gridInfo'>Type(s): $Type1";
+				echo "<p class='gridInfo'>";
+				echo "Price: $$Price<br>";
+				echo "Type(s): $Type1";
 				if ($Type2 !== NULL) {
-					echo ", $Type2</p>";
+					echo ", $Type2";
 				}
-//				echo "</p>"; //FIX so that it says 'Type(s)'
-				
+				echo "<br>";
+				if ($adventure === true) echo "Adventure<br>";
+				if ($battle === true) echo "Battle<br>";
+				if ($companionship === true) echo "Companionship<br>";
+				if ($events === true) echo "Events<br>";
+				echo "</p>";
         		echo "</div>";
     		}
 
