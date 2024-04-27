@@ -21,6 +21,7 @@ COLORS:
 	justify-content: center;
 	color: #000;
 	background-color: #d3ced9;
+	font-family: Helvetica;
 }
 
 nav{
@@ -92,6 +93,7 @@ nav{
 	font-size: 60px;
 	width: 50%;
 	padding-left: 10px;
+	font-family: Helvetica;
 }
 
 #innerHeroText{
@@ -121,6 +123,7 @@ nav{
 	height: 200px;
 	font-size: 24px;
 	color: #e23515;
+	font-family: Helvetica;
 
 }
 
@@ -145,6 +148,7 @@ nav{
 	font-size: 24px;
 	color: #f4f4f4 ;
 	margin-bottom: 200px;
+	font-family: Helvetica;
 
 }
 
@@ -159,6 +163,7 @@ footer{
     position: absolute;
     bottom: 0;
     right: 0;
+	font-family: Helvetica;
 }
 
 #aboutHero{
@@ -179,6 +184,7 @@ footer{
 	border: 2px solid #565656;
 	border-radius: 10px; 
 	margin-bottom: 20px;
+	font-family: Helvetica;
 }
 
 .header{
@@ -268,6 +274,7 @@ footer{
 
 a{
 	text-decoration: none;
+	font-family: Helvetica;
 }
 
 #contactContainer{
