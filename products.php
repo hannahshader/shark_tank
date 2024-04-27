@@ -6,15 +6,15 @@
     <title>Home Page</title>
 
     <link rel="stylesheet" href="stylesBen.css">
+	<style>
+		#landing{
+		    background-image: url("firstsection.jpg");
+		}
+	</style>
 </head>
+	
 <body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="">Order</a>
-        <a href="">Contact Us</a>
-        <a href="">About Us</a>
-        <a href="products.html">Products</a>
-    </nav>
+	<?php include 'header.php'; ?>
 
     <!-- Hero Image and Landing -->
     <div id="landing">
@@ -158,9 +158,6 @@
                 echo "</script>\n";
                 echo "<div class='gridCircle' id=$lowercase_name-image src='char.jpeg'></div>"; //why does this say char.jpeg
 				
-
-
-
 				echo "<script>\n";
 				echo "fetchAPI('$lowercase_name');\n";
 
@@ -215,7 +212,7 @@
 
 
     <footer class="footerStyle">
-        Style for Footer Later
+    	<?php include 'footer.php'; ?>
 
     </footer>
 
@@ -303,37 +300,35 @@
         }
 
        function displayPokemon() {
-		var selectedType = pokemonTypeSelect.value;
-		var selectedPrice = pokemonPriceSelect.value;
-		var selectedCategory = pokemonCategorySelect.value;
+			var selectedType = pokemonTypeSelect.value;
+			var selectedPrice = pokemonPriceSelect.value;
+			var selectedCategory = pokemonCategorySelect.value;
 
-		var pokeDiv = document.getElementsByClassName("gridItem");
+			var pokeDiv = document.getElementsByClassName("gridItem");
 
-		for (var i = 0; i < pokeDiv.length; i++) {
-			var pokemon = pokeDiv[i];
+			for (var i = 0; i < pokeDiv.length; i++) {
+				// Get current pokemon + data elements
+				var pokemon = pokeDiv[i];
+				var type1 = pokemon.dataset.type1;
+				var type2 = pokemon.dataset.type2;
+				var price = pokemon.dataset.price;
+				var categoryAdventure = pokemon.dataset.adventure;
+				var categoryBattle = pokemon.dataset.battle;
+				var categoryCompanionship = pokemon.dataset.companionship;
+				var categoryEvents = pokemon.dataset.events;
 
-			var type1 = pokemon.dataset.type1;
-			var type2 = pokemon.dataset.type2;
-			var price = pokemon.dataset.price;
-			var categoryAdventure = pokemon.dataset.adventure;
-			var categoryBattle = pokemon.dataset.battle;
-			var categoryCompanionship = pokemon.dataset.companionship;
-			var categoryEvents = pokemon.dataset.events;
-			
-			
-			if ((selectedType === '' || selectedType === type1 || selectedType === type2 || (selectedType !== '' && (type2 === '"' || type2 === ""))) &&
-            (selectedPrice === '' || selectedPrice === price) &&
-            
-			(selectedCategory === '' ||(selectedCategory === 'Adventure' && categoryAdventure === "true") || (selectedCategory === 'Battle' && categoryBattle === "true") || (selectedCategory === 'Events' && categoryEvents === "true") || (selectedCategory === 'Companionship' && categoryCompanionship === "true"))) {
-            pokemon.style.display = "";
-        } else {
-            pokemon.style.display = "none";
-        }
-		
+				// Pokemon will display if the selected type matches a type OR if the selected price matches the price OR if the seelected category matches a category the pokemon falls under. 
+				if ((selectedType === '' || selectedType === type1 || selectedType === type2 || (selectedType !== '' && (type2 === '"' || type2 === ""))) &&
+				(selectedPrice === '' || selectedPrice === price) &&
+
+				(selectedCategory === '' ||(selectedCategory === 'Adventure' && categoryAdventure === "true") || (selectedCategory === 'Battle' && categoryBattle === "true") || (selectedCategory === 'Events' && categoryEvents === "true") || (selectedCategory === 'Companionship' && categoryCompanionship === "true"))) {
+					pokemon.style.display = "";
+			} else {
+					pokemon.style.display = "none";
+			}
+
 		}
-	   }
-
-
+	  }
 
         var pokeInfos = document.getElementsByClassName("gridInfo");
 
@@ -365,5 +360,6 @@
             });
         }
     </script>
+	
 </body>
 </html>
