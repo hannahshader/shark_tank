@@ -4,6 +4,7 @@
         <!-- FIX THIS IMAGE LATER SINCE IT IS NOT CLIACKABLE RN -->
         <img src="logo.png" id="logo" alt="logo">
         <div id="webLinks">
+            <a href="index.php" class="nav-items">Home</a>
             <a href="contact.php" class="nav-items">Contact Us</a>
             <a href="about.php" class="nav-items">About Us</a>
 
