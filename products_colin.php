@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>PRODUCTS_COLIN</title>
 
     <link rel="stylesheet" href="stylesBen.css">
 </head>
@@ -92,7 +92,6 @@
                die("Connection failed: " . $conn->connect_error);
            }
 
-
 			// Get + display menu items:
 			$sql = "SELECT * from Pokemon";
 			$whole_menu = $conn->query($sql);
@@ -147,60 +146,49 @@
 				echo "<div class='gridItem' data-type1=$Type1 data-type2=$Type2_handleNULL data-price=$price_range ";
 				echo"data-adventure=$adventure data-companionship=$companionship data-battle=$battle data-events=$events>";
 				
-				$lowercase_name = strtolower("$Name");
+				
+
+                $lowercase_name = strtolower("$Name");
                 if ($lowercase_name == "mr. mime") {
                     $lowercase_name = "mr-mime";
                 }
-                echo "<script>\n";
-
-                echo "</script>\n";
-                echo "<div class='gridCircle' id=$lowercase_name-image src='char.jpeg'></div>"; //why does this say char.jpeg
 				
+				
+                echo "<script>\n";
+               
+                echo "</script>\n";
+                echo "<div class='gridCircle' id=$lowercase_name-image src='char.jpeg'></div>"; //char.jpeg?
 
 
 
-echo "<script>\n";
-echo "fetchAPI('$lowercase_name');\n";
+				echo "<script>\n";
+				echo "fetchAPI('$lowercase_name');\n";
 
-echo "async function fetchAPI(name) {\n";
-// echo "    if(name == 'mr. mime') {\n";
-// echo "      name='mr-mime';\n";
-// echo "    }\n";
-echo "    var urlString = 'https://pokeapi.co/api/v2/pokemon/' + name;\n";
-echo "    var urlStringSpecies = 'https://pokeapi.co/api/v2/pokemon-species/' + name;\n";
-echo "    console.log(urlString);\n";
-echo "    res = fetch(urlString)\n";
-echo "    .then (res => res.text())\n";
-echo "    .then (data =>\n";
-echo "        {\n";
-echo "            resSpec = fetch(urlStringSpecies)\n";
-echo "            .then (resSpec => resSpec.text())\n";
-// echo "            .then (dataSpec =>\n";
-// echo "                {\n";
-// echo "                    dataSpec = JSON.parse(dataSpec);\n";
-// echo "                    const catInEng = dataSpec.genera.find(entry => entry.language.name === 'en');\n";
-// echo "                    const flavorInEng = dataSpec.flavor_text_entries.find(entry => entry.language.name === 'en');\n";
-// echo "                    $('#pokeCat').html(catInEng.genus);\n";
-// echo "                    $('#pokeFlavorText').html(flavorInEng.flavor_text);\n";
-// echo "                })\n";
-// echo "            .catch (error => console.log(error));\n";
+				echo "async function fetchAPI(name) {\n";
 
-echo "            data = JSON.parse(data);\n";
-echo "            image = data.sprites.other['official-artwork'].front_default;\n";
-// echo "            $('#pokeName').html((data.name)[0].toUpperCase() + (data.name).substring(1));\n";
-echo "            console.log((data.name)[0].toUpperCase() + (data.name).substring(1));\n";
-echo "            console.log('IMAGE: ' + image);\n";
-//
-// echo "            statsString = setStatString(data);\n";
-// echo "            $('#pokeStats').html(statsString);\n";
-//
-// echo "            $('#poke3').html('<img src='+image+'>');\n";
-echo "            document.getElementById(name+'-image').innerHTML = '<img src='+image+'>';\n";
-echo "        })\n";
-echo "        .catch (error => console.log(error));\n";
-echo "}\n";
-echo "</script>\n";
+				echo "    var urlString = 'https://pokeapi.co/api/v2/pokemon/' + name;\n";
+				echo "    var urlStringSpecies = 'https://pokeapi.co/api/v2/pokemon-species/' + name;\n";
+				echo "    console.log(urlString);\n";
+				echo "    res = fetch(urlString)\n";
+				echo "    .then (res => res.text())\n";
+				echo "    .then (data =>\n";
+				echo "        {\n";
+				echo "            resSpec = fetch(urlStringSpecies)\n";
+				echo "            .then (resSpec => resSpec.text())\n";
+				echo "            data = JSON.parse(data);\n";
+				echo "            image = data.sprites.other['official-artwork'].front_default;\n";
 
+				echo "            console.log((data.name)[0].toUpperCase() + (data.name).substring(1));\n";
+				echo "            console.log('IMAGE: ' + image);\n";
+
+				echo "            document.getElementById(name+'-image').innerHTML = '<img src='+image+'>';\n";
+				echo "        })\n";
+				echo "        .catch (error => console.log(error));\n";
+				echo "}\n";
+				echo "</script>\n";
+
+
+				
 				// Display Pokémomn's info
 
 				echo "<p class='gridPokemonName'>$Name</p>";
@@ -223,146 +211,18 @@ echo "</script>\n";
     	$conn->close();
 
 			?>
-            <!-- <script>
-            fetchAPI($Name);
-
-            async function fetchAPI(name) {
-                var urlString = 'https://pokeapi.co/api/v2/pokemon/' + name;
-                var urlStringSpecies = 'https://pokeapi.co/api/v2/pokemon-species/' + name;
-                console.log(urlString);
-                // res = fetch('https://pokeapi.co/api/v2/pokemon/ditto')
-                res = fetch(urlString)
-                .then (res => res.text())
-                .then (data =>
-                    {
-                        resSpec = fetch(urlStringSpecies)
-                        .then (resSpec => resSpec.text())
-                        // .then (dataSpec =>
-                        //     {
-                        //         dataSpec = JSON.parse(dataSpec);
-                        //         const catInEng = dataSpec.genera.find(entry => entry.language.name === "en");
-                        //         const flavorInEng = dataSpec.flavor_text_entries.find(entry => entry.language.name === "en");
-                        //
-                        //         $('#pokeCat').html(catInEng.genus);
-                        //         $('#pokeFlavorText').html(flavorInEng.flavor_text);
-                        //     })
-                        //     .catch (error => console.log(error));
-
-                            data = JSON.parse(data);
-                            image = data.sprites.other['official-artwork'].front_default;
-                            // $('#pokeName').html((data.name)[0].toUpperCase() + (data.name).substring(1));
-                            console.log((data.name)[0].toUpperCase() + (data.name).substring(1));
-                            console.log('IMAGE: ' + image);
-                            //
-                            // statsString = setStatString(data);
-                            // $('#pokeStats').html(statsString);
-
-                            // $('#poke3').html('<img src='+image+'>');
-                        })
-                        .catch (error => console.log(error));
-            }
-        </script> -->
-
-
-
-            <!-- OG VERSION OF API CODE, TODO: DELETE -->
-            <!-- <script>
-            // for (var i = 0; i < 3; i++) {
-                fetchAPI();
-            // }
-
-            async function fetchAPI() {
-
-                const randInt = Math.floor(Math.random() * 1025) + 1;
-
-                var urlString = "https://pokeapi.co/api/v2/pokemon/" + randInt;
-                var urlStringSpecies = "https://pokeapi.co/api/v2/pokemon-species/" + randInt;
-                console.log(urlString);
-                // res = fetch("https://pokeapi.co/api/v2/pokemon/ditto")
-                res = fetch(urlString)
-                .then (res => res.text())
-                .then (data =>
-                    {
-                        resSpec = fetch(urlStringSpecies)
-                        .then (resSpec => resSpec.text())
-                        // .then (dataSpec =>
-                        //     {
-                        //         dataSpec = JSON.parse(dataSpec);
-                        //         const catInEng = dataSpec.genera.find(entry => entry.language.name === "en");
-                        //         const flavorInEng = dataSpec.flavor_text_entries.find(entry => entry.language.name === "en");
-                        //
-                        //         $("#pokeCat").html(catInEng.genus);
-                        //         $("#pokeFlavorText").html(flavorInEng.flavor_text);
-                        //     })
-                        //     .catch (error => console.log(error));
-
-                            data = JSON.parse(data);
-                            image = data.sprites.other['official-artwork'].front_default;
-                            // $("#pokeName").html((data.name)[0].toUpperCase() + (data.name).substring(1));
-                            console.log((data.name)[0].toUpperCase() + (data.name).substring(1));
-                            //
-                            // statsString = setStatString(data);
-                            // $("#pokeStats").html(statsString);
-
-                            $("#poke3").html("<img src="+image+">");
-                        })
-                        .catch (error => console.log(error));
-            }
-        </script> -->
-
-<!--				OLD BENSON CODE -->
-
-                <!-- Make instances of these when reading from the API -->
-                <!-- NOTICE to allow for filtering  -->
-<!--
-                <div class="gridItem" data-type="fire" data-price="cheap">
-                    <div class="gridCircle">
-                        <img class="gridImage" src="char.jpeg" alt="">
-                    </div>
-                    <p class="gridPokemonName">Pokemon Name</p>
-                    <p class="gridInfo">More Info</p>
-
-                </div>
-                <div class="gridItem"  data-type="water" data-price="expensive">
-                    <div class="gridCircle">
-                        <img class="gridImage" src="char.jpeg" alt="">
-                    </div>
-                    <p class="gridPokemonName">Pokemon Name</p>
-                    <p class="gridInfo">More Info</p>
-
-                </div>
-                <div class="gridItem"  data-type="ground" data-price="cheap">
-                    <div class="gridCircle">
-                        <img class="gridImage" src="char.jpeg" alt="">
-                    </div>
-                    <p class="gridPokemonName">Pokemon Name</p>
-                    <p class="gridInfo">More Info</p>
-
-                </div>
-                <div class="gridItem"  data-type="fire" data-price="average">
-                    <div class="gridCircle">
-                        <img class="gridImage" src="char.jpeg" alt="">
-                    </div>
-                    <p class="gridPokemonName">Pokemon Name</p>
-                    <p class="gridInfo">More Info</p>
-
-                </div>
--->
-
             </div>
         </div>
 
     </div>
 
-
     <footer class="footerStyle">
         Style for Footer Later
-
     </footer>
 
 
     <script>
-              // Get the select elements
+        // Get the select elements
         var pokemonTypeSelect = document.getElementById('pokemonTypeSelect');
         var pokemonPriceSelect = document.getElementById('pokemonPriceSelect');
 
