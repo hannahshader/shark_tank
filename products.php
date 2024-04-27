@@ -38,21 +38,41 @@
         <div>
             <!-- Filters -->
             <div>
-                <select name="pokemonType" id="pokemonTypeSelect">
+                <select name="pokemonCategory" id="pokemonCategorySelect">
+                    <option value="" selected disabled>Category &#x25BE;</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Battle">Battle</option>
+                    <option value="Companionship">Companionship</option>
+					<option value="Events">Events</option>
+                </select>
+				
+				<select name="pokemonType" id="pokemonTypeSelect">
                     <option value="" selected disabled>Select your type &#x25BE;</option>
-					<option value="NOTICE">HAVENT DONE FILTERING W PHP YET. THEY ARE ALL SET TO FIRE TYPE</option>
+				  <option value="Normal">Normal</option>
                     <option value="Fire">Fire</option>
                     <option value="Water">Water</option>
+					<option value="Electric">Electric</option>
+					<option value="Grass">Grass</option>
+					<option value="Ice">Ice</option>
+					<option value="Fighting">Fighting</option>
+					<option value="Poison">Poison</option>
                     <option value="Ground">Ground</option>
-                    <!-- add more -->
+					<option value="Flying">Flying</option>
+					<option value="Psychic">Psychic</option>
+					<option value="Bug">Bug</option>
+					<option value="Rock">Rock</option>
+					<option value="Ghost">Ghost</option>
+					<option value="Dragon">Dragon</option>
+					<option value="Dark">Dark</option>
+					<option value="Steel">Steel</option>
+					<option value="Fairy">Fairy</option>
                 </select>
 
                 <select name="pokemonPrice" id="pokemonPriceSelect">
                     <option value="" selected disabled>Price Range &#x25BE;</option>
-                    <option value="cheap">$10+</option>
-                    <option value="average">$50+</option>
-                    <option value="expensive">$100+</option>
-                    <!-- add more -->
+                    <option value="cheap">$0—1,000</option>
+                    <option value="average">$1,001—5,000</option>
+                    <option value="expensive">$5,001—10,000</option>
                 </select>
 
             </div>
@@ -80,23 +100,62 @@
 			while($row = $whole_menu->fetch_assoc())
 			{
 				extract ($row);
-				echo "<div class='gridItem' data-type='Fire' data-price='cheap'>"; //FIX data-type SO IT PULLS FROM DATABASE
+				
+				// Get categories for the current Pokémon
+				$categories_sql = "SELECT Category FROM Pokemon_Categories WHERE Name = '$Name'";
+				$categories_result = $conn->query($categories_sql);
 
-				// dummy code. TODO: get + display image from API.
-                // echo "bingusMode($Name);";
-                // echo "<script>";
-                // echo "function bingusMode(name) { console.log('Name') }";
-                // echo "</script>";
-                $lowercase_name = strtolower("$Name");
+				$adventure = false;
+				$battle = false;
+				$companionship = false;
+				$events = false;
+
+				while ($categories_row = $categories_result->fetch_assoc()) {
+					switch ($categories_row["Category"]) {
+						case "Adventure":
+							$adventure = true;
+							break;
+						case "Battle":
+							$battle = true;
+							break;
+						case "Companionship":
+							$companionship = true;
+							break;
+						case "Events":
+							$events = true;
+							break;
+						default:
+							// Handle unknown category
+							break;
+					}
+				}
+				
+				$price_range = "cheap";
+				
+				if ($Price > 5000) {
+					$price_range = "expensive";
+				} else if ($Price > 1000) {
+					$price_range = "average";
+				} 
+				
+				$Type2_handleNULL = $Type2;
+				if ($Type2 === null) {
+					$Type2_handleNULL = "NULL";
+				}
+				
+				
+				echo "<div class='gridItem' data-type1=$Type1 data-type2=$Type2_handleNULL data-price=$price_range ";
+				echo"data-adventure=$adventure data-companionship=$companionship data-battle=$battle data-events=$events>";
+				
+				$lowercase_name = strtolower("$Name");
                 if ($lowercase_name == "mr. mime") {
                     $lowercase_name = "mr-mime";
                 }
                 echo "<script>\n";
-                // echo "console.log('yooo its: $lowercase_name')\n";
-                echo "</script>\n";
-                echo "<div class='gridCircle' id=$lowercase_name-image src='char.jpeg'>
 
-                    </div>";
+                echo "</script>\n";
+                echo "<div class='gridCircle' id=$lowercase_name-image src='char.jpeg'></div>"; //why does this say char.jpeg
+				
 
 
 
@@ -142,11 +201,21 @@ echo "        .catch (error => console.log(error));\n";
 echo "}\n";
 echo "</script>\n";
 
-
-
+				// Display Pokémomn's info
 
 				echo "<p class='gridPokemonName'>$Name</p>";
-				echo "<p class='gridInfo'>Price: $$Price</p>";
+				echo "<p class='gridInfo'>";
+				echo "Price: $$Price<br>";
+				echo "Type(s): $Type1";
+				if ($Type2 !== NULL) {
+					echo ", $Type2";
+				}
+				echo "<br>";
+				if ($adventure === true) echo "Adventure<br>";
+				if ($battle === true) echo "Battle<br>";
+				if ($companionship === true) echo "Companionship<br>";
+				if ($events === true) echo "Events<br>";
+				echo "</p>";
         		echo "</div>";
     		}
 
@@ -293,7 +362,7 @@ echo "</script>\n";
 
 
     <script>
-        // Get the select elements
+              // Get the select elements
         var pokemonTypeSelect = document.getElementById('pokemonTypeSelect');
         var pokemonPriceSelect = document.getElementById('pokemonPriceSelect');
 
@@ -318,7 +387,8 @@ echo "</script>\n";
             var selectedOptionText = selectElement.options[selectElement.selectedIndex].text;
 
             // Determine the type of the filter (price or type) based on the id of the select element
-            var filterType = selectElement.id === 'pokemonTypeSelect' ? 'type' : 'price';
+            var filterType = selectElement.id === 'pokemonTypeSelect' ? 'price' : 'type';
+//			var filterType = selectElement.id === 'pokemonTypeSelect' ? 'type1' || 'type2' : 'price';
 
             // Remove any existing filter of the same type from the "Active Filters" div
             var existingFilterDivs = activeFiltersDiv.getElementsByTagName('div');
@@ -352,6 +422,7 @@ echo "</script>\n";
 
                 // Get the corresponding select element
                 var selectElement = filterType === 'type' ? pokemonTypeSelect : pokemonPriceSelect;
+//				  var selectElement = filterType === 'type1' || filterType === 'type2' ? pokemonTypeSelect : pokemonPriceSelect;
 
                 // Reset the select element to its default option
                 selectElement.selectedIndex = 0;
@@ -366,28 +437,27 @@ echo "</script>\n";
 
         }
 
-        function displayPokemon(){
-            var selectedType = pokemonTypeSelect.value;
-            var selectedPrice = pokemonPriceSelect.value;
+       function displayPokemon() {
+		var selectedType = pokemonTypeSelect.value;
+		var selectedPrice = pokemonPriceSelect.value;
 
-            var pokeDiv = document.getElementsByClassName("gridItem");
+		var pokeDiv = document.getElementsByClassName("gridItem");
 
-            for(var i = 0; i < pokeDiv.length ; i++){
-                var pokemon = pokeDiv[i];
+		for (var i = 0; i < pokeDiv.length; i++) {
+			var pokemon = pokeDiv[i];
 
-                var type = pokemon.dataset.type;
-                var price = pokemon.dataset.price;
+			var type1 = pokemon.dataset.type1;
+			var type2 = pokemon.dataset.type2;
+			var price = pokemon.dataset.price;
 
-
-                if((selectedType === '' || selectedType === type) && (selectedPrice === '' || selectedPrice === price)){
-                    pokemon.style.display = "";
-                }
-                else{
-                    pokemon.style.display = "none";
-                }
-
-            }
-        }
+			if ((selectedType === '' || selectedType === type1 || selectedType === type2 || (selectedType !== '' && (type2 === '"' || type2 === ""))) &&
+				(selectedPrice === '' || selectedPrice === price)) {
+				pokemon.style.display = "";
+			} else {
+				pokemon.style.display = "none";
+			}
+		}
+	   }
 
 
 
