@@ -69,11 +69,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->affected_rows > 0) {
             echo "<p>Order successfully added!</p>";
         } else {
-            echo "<p>Error inserting order: " . $stmt->error . "</p>";
+            echo "<p>Whoops! Looks like you tried to order something we don't have!</p>";
         }
         $stmt->close();
     } else {
-        echo "Error preparing statement: " . $conn->error;
+        echo "Whoops! Your order failed.";
     }
     $conn->close();
 }
