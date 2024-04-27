@@ -105,24 +105,26 @@
 				$categories_sql = "SELECT Category FROM Pokemon_Categories WHERE Name = '$Name'";
 				$categories_result = $conn->query($categories_sql);
 
-				$adventure = false;
-				$battle = false;
-				$companionship = false;
-				$events = false;
+// Note: I know this is bad practice but something was getting messed up with the bools so i just brute forced it and used strings. Lol.
+			
+				$adventure = "false";
+				$battle = "false";
+				$companionship = "false";
+				$events = "false";
 
 				while ($categories_row = $categories_result->fetch_assoc()) {
 					switch ($categories_row["Category"]) {
 						case "Adventure":
-							$adventure = true;
+							$adventure = "true";
 							break;
 						case "Battle":
-							$battle = true;
+							$battle = "true";
 							break;
 						case "Companionship":
-							$companionship = true;
+							$companionship = "true";
 							break;
 						case "Events":
-							$events = true;
+							$events = "true";
 							break;
 						default:
 							// Handle unknown category
@@ -159,50 +161,33 @@
 
 
 
-echo "<script>\n";
-echo "fetchAPI('$lowercase_name');\n";
+				echo "<script>\n";
+				echo "fetchAPI('$lowercase_name');\n";
 
-echo "async function fetchAPI(name) {\n";
-// echo "    if(name == 'mr. mime') {\n";
-// echo "      name='mr-mime';\n";
-// echo "    }\n";
-echo "    var urlString = 'https://pokeapi.co/api/v2/pokemon/' + name;\n";
-echo "    var urlStringSpecies = 'https://pokeapi.co/api/v2/pokemon-species/' + name;\n";
-echo "    console.log(urlString);\n";
-echo "    res = fetch(urlString)\n";
-echo "    .then (res => res.text())\n";
-echo "    .then (data =>\n";
-echo "        {\n";
-echo "            resSpec = fetch(urlStringSpecies)\n";
-echo "            .then (resSpec => resSpec.text())\n";
-// echo "            .then (dataSpec =>\n";
-// echo "                {\n";
-// echo "                    dataSpec = JSON.parse(dataSpec);\n";
-// echo "                    const catInEng = dataSpec.genera.find(entry => entry.language.name === 'en');\n";
-// echo "                    const flavorInEng = dataSpec.flavor_text_entries.find(entry => entry.language.name === 'en');\n";
-// echo "                    $('#pokeCat').html(catInEng.genus);\n";
-// echo "                    $('#pokeFlavorText').html(flavorInEng.flavor_text);\n";
-// echo "                })\n";
-// echo "            .catch (error => console.log(error));\n";
+				echo "async function fetchAPI(name) {\n";
 
-echo "            data = JSON.parse(data);\n";
-echo "            image = data.sprites.other['official-artwork'].front_default;\n";
-// echo "            $('#pokeName').html((data.name)[0].toUpperCase() + (data.name).substring(1));\n";
-echo "            console.log((data.name)[0].toUpperCase() + (data.name).substring(1));\n";
-echo "            console.log('IMAGE: ' + image);\n";
-//
-// echo "            statsString = setStatString(data);\n";
-// echo "            $('#pokeStats').html(statsString);\n";
-//
-// echo "            $('#poke3').html('<img src='+image+'>');\n";
-echo "            document.getElementById(name+'-image').innerHTML = '<img src='+image+'>';\n";
-echo "        })\n";
-echo "        .catch (error => console.log(error));\n";
-echo "}\n";
-echo "</script>\n";
+				echo "    var urlString = 'https://pokeapi.co/api/v2/pokemon/' + name;\n";
+				echo "    var urlStringSpecies = 'https://pokeapi.co/api/v2/pokemon-species/' + name;\n";
+				echo "    console.log(urlString);\n";
+				echo "    res = fetch(urlString)\n";
+				echo "    .then (res => res.text())\n";
+				echo "    .then (data =>\n";
+				echo "        {\n";
+				echo "            resSpec = fetch(urlStringSpecies)\n";
+				echo "            .then (resSpec => resSpec.text())\n";
+				echo "            data = JSON.parse(data);\n";
+				echo "            image = data.sprites.other['official-artwork'].front_default;\n";
+
+				echo "            console.log((data.name)[0].toUpperCase() + (data.name).substring(1));\n";
+				echo "            console.log('IMAGE: ' + image);\n";
+
+				echo "            document.getElementById(name+'-image').innerHTML = '<img src='+image+'>';\n";
+				echo "        })\n";
+				echo "        .catch (error => console.log(error));\n";
+				echo "}\n";
+				echo "</script>\n";
 
 				// Display Pokémomn's info
-
 				echo "<p class='gridPokemonName'>$Name</p>";
 				echo "<p class='gridInfo'>";
 				echo "Price: $$Price<br>";
@@ -211,10 +196,10 @@ echo "</script>\n";
 					echo ", $Type2";
 				}
 				echo "<br>";
-				if ($adventure === true) echo "Adventure<br>";
-				if ($battle === true) echo "Battle<br>";
-				if ($companionship === true) echo "Companionship<br>";
-				if ($events === true) echo "Events<br>";
+				if ($adventure === "true") echo "Adventure<br>";
+				if ($battle === "true") echo "Battle<br>";
+				if ($companionship === "true") echo "Companionship<br>";
+				if ($events === "true") echo "Events<br>";
 				echo "</p>";
         		echo "</div>";
     		}
@@ -223,132 +208,6 @@ echo "</script>\n";
     	$conn->close();
 
 			?>
-            <!-- <script>
-            fetchAPI($Name);
-
-            async function fetchAPI(name) {
-                var urlString = 'https://pokeapi.co/api/v2/pokemon/' + name;
-                var urlStringSpecies = 'https://pokeapi.co/api/v2/pokemon-species/' + name;
-                console.log(urlString);
-                // res = fetch('https://pokeapi.co/api/v2/pokemon/ditto')
-                res = fetch(urlString)
-                .then (res => res.text())
-                .then (data =>
-                    {
-                        resSpec = fetch(urlStringSpecies)
-                        .then (resSpec => resSpec.text())
-                        // .then (dataSpec =>
-                        //     {
-                        //         dataSpec = JSON.parse(dataSpec);
-                        //         const catInEng = dataSpec.genera.find(entry => entry.language.name === "en");
-                        //         const flavorInEng = dataSpec.flavor_text_entries.find(entry => entry.language.name === "en");
-                        //
-                        //         $('#pokeCat').html(catInEng.genus);
-                        //         $('#pokeFlavorText').html(flavorInEng.flavor_text);
-                        //     })
-                        //     .catch (error => console.log(error));
-
-                            data = JSON.parse(data);
-                            image = data.sprites.other['official-artwork'].front_default;
-                            // $('#pokeName').html((data.name)[0].toUpperCase() + (data.name).substring(1));
-                            console.log((data.name)[0].toUpperCase() + (data.name).substring(1));
-                            console.log('IMAGE: ' + image);
-                            //
-                            // statsString = setStatString(data);
-                            // $('#pokeStats').html(statsString);
-
-                            // $('#poke3').html('<img src='+image+'>');
-                        })
-                        .catch (error => console.log(error));
-            }
-        </script> -->
-
-
-
-            <!-- OG VERSION OF API CODE, TODO: DELETE -->
-            <!-- <script>
-            // for (var i = 0; i < 3; i++) {
-                fetchAPI();
-            // }
-
-            async function fetchAPI() {
-
-                const randInt = Math.floor(Math.random() * 1025) + 1;
-
-                var urlString = "https://pokeapi.co/api/v2/pokemon/" + randInt;
-                var urlStringSpecies = "https://pokeapi.co/api/v2/pokemon-species/" + randInt;
-                console.log(urlString);
-                // res = fetch("https://pokeapi.co/api/v2/pokemon/ditto")
-                res = fetch(urlString)
-                .then (res => res.text())
-                .then (data =>
-                    {
-                        resSpec = fetch(urlStringSpecies)
-                        .then (resSpec => resSpec.text())
-                        // .then (dataSpec =>
-                        //     {
-                        //         dataSpec = JSON.parse(dataSpec);
-                        //         const catInEng = dataSpec.genera.find(entry => entry.language.name === "en");
-                        //         const flavorInEng = dataSpec.flavor_text_entries.find(entry => entry.language.name === "en");
-                        //
-                        //         $("#pokeCat").html(catInEng.genus);
-                        //         $("#pokeFlavorText").html(flavorInEng.flavor_text);
-                        //     })
-                        //     .catch (error => console.log(error));
-
-                            data = JSON.parse(data);
-                            image = data.sprites.other['official-artwork'].front_default;
-                            // $("#pokeName").html((data.name)[0].toUpperCase() + (data.name).substring(1));
-                            console.log((data.name)[0].toUpperCase() + (data.name).substring(1));
-                            //
-                            // statsString = setStatString(data);
-                            // $("#pokeStats").html(statsString);
-
-                            $("#poke3").html("<img src="+image+">");
-                        })
-                        .catch (error => console.log(error));
-            }
-        </script> -->
-
-<!--				OLD BENSON CODE -->
-
-                <!-- Make instances of these when reading from the API -->
-                <!-- NOTICE to allow for filtering  -->
-<!--
-                <div class="gridItem" data-type="fire" data-price="cheap">
-                    <div class="gridCircle">
-                        <img class="gridImage" src="char.jpeg" alt="">
-                    </div>
-                    <p class="gridPokemonName">Pokemon Name</p>
-                    <p class="gridInfo">More Info</p>
-
-                </div>
-                <div class="gridItem"  data-type="water" data-price="expensive">
-                    <div class="gridCircle">
-                        <img class="gridImage" src="char.jpeg" alt="">
-                    </div>
-                    <p class="gridPokemonName">Pokemon Name</p>
-                    <p class="gridInfo">More Info</p>
-
-                </div>
-                <div class="gridItem"  data-type="ground" data-price="cheap">
-                    <div class="gridCircle">
-                        <img class="gridImage" src="char.jpeg" alt="">
-                    </div>
-                    <p class="gridPokemonName">Pokemon Name</p>
-                    <p class="gridInfo">More Info</p>
-
-                </div>
-                <div class="gridItem"  data-type="fire" data-price="average">
-                    <div class="gridCircle">
-                        <img class="gridImage" src="char.jpeg" alt="">
-                    </div>
-                    <p class="gridPokemonName">Pokemon Name</p>
-                    <p class="gridInfo">More Info</p>
-
-                </div>
--->
-
             </div>
         </div>
 
@@ -365,6 +224,7 @@ echo "</script>\n";
               // Get the select elements
         var pokemonTypeSelect = document.getElementById('pokemonTypeSelect');
         var pokemonPriceSelect = document.getElementById('pokemonPriceSelect');
+		var pokemonCategorySelect = document.getElementById('pokemonCategorySelect');
 
         // Get the "Active Filters" div
         var activeFiltersDiv = document.getElementById('activeFilters');
@@ -380,15 +240,20 @@ echo "</script>\n";
             displaySelectedFilter(this, activeFiltersDiv);
 
         });
+		
+		// Add event listener to the 'pokemonPriceSelect' select element
+        pokemonCategorySelect.addEventListener('change', function() {
+            displaySelectedFilter(this, activeFiltersDiv);
+
+        });
 
         // Function to display the selected filter
         function displaySelectedFilter(selectElement, activeFiltersDiv) {
             // Get the selected option's text
             var selectedOptionText = selectElement.options[selectElement.selectedIndex].text;
 
-            // Determine the type of the filter (price or type) based on the id of the select element
-            var filterType = selectElement.id === 'pokemonTypeSelect' ? 'price' : 'type';
-//			var filterType = selectElement.id === 'pokemonTypeSelect' ? 'type1' || 'type2' : 'price';
+            // Determine the type of the filter (price or type or category) based on the id of the select element
+			var filterType = selectElement.id === 'pokemonTypeSelect' ? 'type' : selectElement.id === 'pokemonPriceSelect' ? 'price' : 'category';
 
             // Remove any existing filter of the same type from the "Active Filters" div
             var existingFilterDivs = activeFiltersDiv.getElementsByTagName('div');
@@ -421,8 +286,8 @@ echo "</script>\n";
                 var filterType = this.dataset.filterType;
 
                 // Get the corresponding select element
-                var selectElement = filterType === 'type' ? pokemonTypeSelect : pokemonPriceSelect;
-//				  var selectElement = filterType === 'type1' || filterType === 'type2' ? pokemonTypeSelect : pokemonPriceSelect;
+				var selectElement = filterType === 'type' ? pokemonTypeSelect : filterType === 'price' ? pokemonPriceSelect : pokemonCategorySelect;
+
 
                 // Reset the select element to its default option
                 selectElement.selectedIndex = 0;
@@ -440,6 +305,7 @@ echo "</script>\n";
        function displayPokemon() {
 		var selectedType = pokemonTypeSelect.value;
 		var selectedPrice = pokemonPriceSelect.value;
+		var selectedCategory = pokemonCategorySelect.value;
 
 		var pokeDiv = document.getElementsByClassName("gridItem");
 
@@ -449,13 +315,21 @@ echo "</script>\n";
 			var type1 = pokemon.dataset.type1;
 			var type2 = pokemon.dataset.type2;
 			var price = pokemon.dataset.price;
-
+			var categoryAdventure = pokemon.dataset.adventure;
+			var categoryBattle = pokemon.dataset.battle;
+			var categoryCompanionship = pokemon.dataset.companionship;
+			var categoryEvents = pokemon.dataset.events;
+			
+			
 			if ((selectedType === '' || selectedType === type1 || selectedType === type2 || (selectedType !== '' && (type2 === '"' || type2 === ""))) &&
-				(selectedPrice === '' || selectedPrice === price)) {
-				pokemon.style.display = "";
-			} else {
-				pokemon.style.display = "none";
-			}
+            (selectedPrice === '' || selectedPrice === price) &&
+            
+			(selectedCategory === '' ||(selectedCategory === 'Adventure' && categoryAdventure === "true") || (selectedCategory === 'Battle' && categoryBattle === "true") || (selectedCategory === 'Events' && categoryEvents === "true") || (selectedCategory === 'Companionship' && categoryCompanionship === "true"))) {
+            pokemon.style.display = "";
+        } else {
+            pokemon.style.display = "none";
+        }
+		
 		}
 	   }
 
