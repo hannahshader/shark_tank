@@ -323,11 +323,11 @@
 
 				(selectedCategory === '' ||(selectedCategory === 'Adventure' && categoryAdventure === "true") || (selectedCategory === 'Battle' && categoryBattle === "true") || (selectedCategory === 'Events' && categoryEvents === "true") || (selectedCategory === 'Companionship' && categoryCompanionship === "true"))) {
 					pokemon.style.display = "";
-			} else {
+				} else {
 					pokemon.style.display = "none";
-			}
+				}
 
-		}
+			}
 	  }
 
         var pokeInfos = document.getElementsByClassName("gridInfo");
