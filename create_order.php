@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="create_order.css">
     <title>Order Form</title>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -12,9 +14,10 @@
     </script>
 </head>
 <body>
+    <div id="form-container">
     <h1>Place Order</h1>
     <form method="post">
-        <input type="hidden" id="orderID" name="orderID"> 
+        <input type="hidden" id="orderID" name="orderID">
         <div>
             <label for="quantity">Quantity:</label>
             <input type="number" id="quantity" name="quantity" required>
@@ -43,6 +46,21 @@
             <button type="submit">Submit Order</button>
         </div>
     </form>
+    </div>
+
+    <br/>
+
+    <img src="GTS.jpeg">
+
+    <div class="container">
+        <div></div>
+    </div>
+
+    <div class="diagonal-div">
+        <div class="content">
+            content goes here lol
+        </div>
+    </div>
 </body>
 </html>
 <?php
@@ -58,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $specialInstructions = $_POST['specialInstructions'];
     $customerFirstName = $_POST['customerFirstName'];
     $customerLastName = $_POST['customerLastName'];
-    $orderDate = date("Y-m-d"); 
+    $orderDate = date("Y-m-d");
     $email = $_POST['email'];
 
     $sql = "INSERT INTO Orders (OrderID, Quantity, PokemonName, SpecialInstructions, CustomerFirstName, CustomerLastName, OrderDate, Email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -141,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $specialInstructions = $_POST['specialInstructions'];
     $customerFirstName = $_POST['customerFirstName'];
     $customerLastName = $_POST['customerLastName'];
-    $orderDate = date("Y-m-d"); 
+    $orderDate = date("Y-m-d");
     $email = $_POST['email'];
 
     $sql = "INSERT INTO Orders (OrderID, Quantity, PokemonName, SpecialInstructions, CustomerFirstName, CustomerLastName, OrderDate, Email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
