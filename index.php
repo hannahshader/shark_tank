@@ -4,7 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="style.css">
+    <style media="screen">
+    @font-face {
+        font-family: 'pokemon_blackwhiteregular';
+        src: url('pokemon-black-white-webfont.woff2') format('woff2'),
+        url('pokemon-black-white-webfont.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+        #heroText {
+            background: rgba(0, 0, 0, 0.6);
+            font-family: 'pokemon_blackwhiteregular';
+            font-size: 100px;
+            font-weight: lighter;
+        }
+    </style>
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -15,7 +32,7 @@
         <div id="heroText">
             Premier Pokemon Rentals
             <br/>
-            <p id="innerHeroText">Located in the Sinnoh Region</p>
+            <p id="innerHeroText">Let us make your event <span style='color:#E23514;'>Premier!</span></p>
         </div>
     </div>
 
@@ -27,8 +44,8 @@
             <p >Welcome to Premier Pokémon Rentals, based in the picturesque Sinnoh region! With a diverse arsenal of over 20 Pokémon to choose from, we cater to all your needs, whether it's for battling, companionship, special events like birthdays and weddings, or embarking on thrilling adventures.
             </p>
         </div>
-        
-        
+
+
 
     </div>
 

@@ -1,18 +1,15 @@
 <nav>
-
-        <!-- ADD THE LINKS TO THE FILES LATER HERE -->
         <img src="logo.png" id="logo" alt="logo">
         <div id="webLinks">
             <a href="index.php" class="nav-items">Home</a>
             <a href="contact.php" class="nav-items">Contact Us</a>
             <a href="about.php" class="nav-items">About Us</a>
-
-            <a href="products.php" class="nav-items">Products</a>
+            <a href="products.php" class="nav-items">Our Pokémon</a>
         </div>
         <div id="orderLinks">
-            <a href="create_order.php" class="nav-items">Order</a>
-            <a href="get_order_from_email.php" class="nav-items">Order Tracking</a>
-            <a href="get_all_orders.php" class="nav-items">All Orders</a>
+            <a href="create_order.php" class="nav-items" id="orderbutton">Order</a>
+            <a href="get_order_from_email.php" class="nav-items" id="trackingbutton">Order Tracking</a>
+            <a href="get_all_orders.php" class="nav-items" id="allordersbutton">All Orders</a>
         </div>
         <div id="hamburger">
             <div></div>
@@ -23,7 +20,7 @@
             <a href="index.php" class="mobileNav">Home</a>
             <a href="contact.php" class="mobileNav">Contact Us</a>
             <a href="about.php" class="mobileNav">About Us</a>
-            <a href="products.php" class="mobileNav">Products</a>
+            <a href="products.php" class="mobileNav">Our Pokémon</a>
             <a href="create_order.php" class="mobileNav">Order</a>
             <a href="get_order_from_email.php" class="mobileNav">Order Tracking</a>
             <a href="get_all_orders.php" class="mobileNav">All Orders</a>
