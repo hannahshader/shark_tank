@@ -36,7 +36,7 @@
         </div>
 
 
-        <div id="innerContactContainer">
+        <div id="sinnerContactContainer">
             <div id="secContactSec">
                 <form action="">
                     <label for="name">Name:</label><br>

@@ -41,7 +41,7 @@
                 Browse our selection and embark on your next Pokémon journey with us!</p>
 
         </div>
-        <img src="firstsection.jpg" id="imageContainer" alt="">
+        <img src="home2.jpeg" id="imageContainer" alt="">
 
 
     </div>

@@ -1,4 +1,14 @@
-<div class="container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<?php include 'header.php'; ?>
+<div id="eContain" style="margin-top:100px;">
     <form action="" method="post">
         <label for="email">Enter Your Email:</label><br>
         <input type="email" id="email" name="email" required><br><br>
@@ -114,3 +124,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
     }
 }
 ?>
+<?php include 'footer.php'; ?>
+</body>
+</html>
+
+

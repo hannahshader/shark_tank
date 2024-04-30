@@ -7,6 +7,7 @@ body {
     font-style: normal;
     background-image: url("orderbg.jpg");
     background-attachment: scroll;
+    margin-bottom: 0;
 }
 
 @font-face {
@@ -173,6 +174,7 @@ body {
 }
 
 #body-wrap{
+    padding-top: 80px;
     display: inline-block;
 }
 
@@ -186,4 +188,242 @@ body {
 
 #right-side-div img {
     margin: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+nav{
+    left:0px;
+	width: 100%;
+	height: 90px;
+	background-color:#f4f4f4  ;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	position: fixed;
+    top: 0;
+    z-index: 1;
+	border-bottom: 2px solid black;
+	box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.1);
+}
+
+#logo{
+	width: 80px;
+	height: 85%;
+	padding-left: 10px;
+}
+
+.nav-items{
+	text-decoration: none;
+	font-size: 20px;
+	color: #e23515;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.nav-items:hover{
+	color: #000000;
+    /* background-color: #b8abb3; */
+}
+
+#webLinks{
+	width: 40%;
+	height: 100%;
+}
+
+
+#orderLinks{
+	width: 25%;
+	height: 100%;
+}
+
+
+#webLinks,#orderLinks{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+footer{
+	width: 100%;
+	height: 80px;
+	font-size: 18px;
+	position: relative;
+    bottom: 0px;
+    display: inline-block;
+    justify-content: center;
+}
+
+#footerText {
+    position: absolute;
+    bottom: 0;
+	font-family: Helvetica;
+        display: block;
+        text-align: center;
+        right: 0px;
+        left: 0px;
+}
+
+.header{
+	font-size: 30px;
+	font-weight: bold;
+	padding-top: 120px;
+    text-align: center;
+}
+
+a{
+	text-decoration: none;
+}
+
+.nav-items{
+	font-size: 30px;
+    font-weight: bolder;
+}
+
+#hamburger{
+	display: none;
+}
+
+
+
+.mobileNav{
+	color: #eeeef4;
+	border-bottom: 1px solid #eeeef4;
+}
+
+.mobileNav:hover{
+	color: #565656;
+}
+
+@media (max-width: 1180px){
+	#orderForm{
+		margin: 0px 30px;
+	}
+}
+
+@media (max-width: 820px) {
+
+	#hero{
+		margin-top: 90px;
+		width: 100%;
+		height: 50vh;
+		background-position: 0px center;
+		color: #eeeef4;
+	}
+
+	#heroText{
+		font-size: 24px;
+	}
+	#innerHeroText {
+		font-size: 18px;
+	}
+
+	#imageContainer{
+		width: 40vh;
+		height: 30vh;
+	}
+
+	.aboutDesItem{
+		width: 45vw;
+		padding: 10px;
+	}
+
+	#center{
+		display: none;
+	}
+
+	.itemImg{
+		height: 200px;
+	}
+
+	#innerContactContainer{
+		margin-top: 150px;
+		width: 75vw;
+	}
+
+	#sinnerContactContainer{
+		width: 75vw;
+		margin-top: 50px;
+	}
+
+	#fSecText, #sSecText{
+		font-size: 16px;
+	}
+
+	#sSecText{
+		margin-bottom: 100px;
+	}
+
+	#aboutHero{
+		height: 120vh;
+	}
+
+	.section{
+		height: 70vh;
+	}
+
+
+	#fHeader{
+		font-size: 20px;
+	}
+
+    #webLinks, #orderLinks{
+		display: none;
+	}
+
+	#hamburger{
+		width: 30px;
+		height: 20px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding-right: 10px;
+	}
+
+	#hamburger:hover{
+		cursor: pointer;
+	}
+
+	#hamburger div {
+		width: 100%;
+		height: 4px;
+		background-color: #333;
+	}
+
+	#orderImg{
+		display: none;
+	}
+
+	#makeOrder{
+		justify-content: center;
+		align-items: center;
+	}
+
 }

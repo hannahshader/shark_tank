@@ -23,11 +23,15 @@
     <div id="aboutDescription">
         <div class="aboutDesItem">
             <img src="regions.jpeg" class="itemImg" alt="">
-            At Premier Pokémon Rentals, we provide a unique service that allows trainers and enthusiasts alike to experience the joys of Pokémon ownership without the long-term commitment. Whether you're seeking a partner for battling, a loyal companion for everyday adventures, or a majestic addition to your special event, our diverse collection of Pokémon from Kanto, Hoenn, Johto, Sinnoh, and Unova regions has something for everyone.
+            <p class="desText">
+                At Premier Pokémon Rentals, we provide a unique service that allows trainers and enthusiasts alike to experience the joys of Pokémon ownership without the long-term commitment. Whether you're seeking a partner for battling, a loyal companion for everyday adventures, or a majestic addition to your special event, our diverse collection of Pokémon from Kanto, Hoenn, Johto, Sinnoh, and Unova regions has something for everyone.
+            </p>
         </div>
         <div class="aboutDesItem">
             <img src="togepi.jpg" class="itemImg" alt="">
-            For companionship, imagine the joy of having a Togepi by your side, spreading cheer with its electrifying personality. For battle, unleash the power of an Arcanine, charging forward with fiery determination. For adventure, explore the wilderness with a playful Bayleef, discovering new wonders around every corner. And for events, dazzle your guests with the elegance of a Ninetales or the grandeur of a Tropius, creating unforgettable memories.
+            <p class="desText">
+                For companionship, imagine the joy of having a Togepi by your side, spreading cheer with its electrifying personality. For battle, unleash the power of an Arcanine, charging forward with fiery determination. For adventure, explore the wilderness with a playful Bayleef, discovering new wonders around every corner. And for events, dazzle your guests with the elegance of a Ninetales or the grandeur of a Tropius, creating unforgettable memories.
+            </p>
         </div>
 
     </div>
